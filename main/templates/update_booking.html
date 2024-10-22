@@ -1,0 +1,171 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Booking - Jelajah Didik Pahang</title>
+    <link rel="icon" href="{% static 'images/logo[1].png' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles2.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: url('{% static "images/background.png" %}') no-repeat center center fixed;
+        background-size: cover;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        padding-top: 60px;
+    }
+
+    header {
+        background-color: rgba(255, 255, 255, 0);
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+    }
+
+    .logo-title-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo img {
+        height: 80%;
+        margin-right: 10px;
+    }
+
+    .header-title {
+        font-size: 1.5em;
+        color: #ffffff;
+    }
+
+    .return-btn {
+        background-color: #ffffff;
+        color: #006666;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .return-btn:hover {
+        transition: 0.7s;
+        background-color: #aba9a9;
+    }
+
+    .update-booking-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+    }
+
+    h2 {
+        color: #008080;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: grid;
+        gap: 15px;
+    }
+
+    .btn {
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .btn-update {
+        background-color: #008080;
+        color: white;
+    }
+
+    .btn-cancel {
+        background-color: #ff4d4d;
+        color: white;
+        margin-top: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    select, input[type="date"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .btn-update {
+        width: 100%;
+    }
+
+    .btn-cancel {
+        width: 100%;
+        margin-top: 10px;
+    }
+</style>
+<body>
+    <header>
+        <div class="logo-title-container">
+            <div class="logo">
+                <img src='{% static "images/logo[1].png" %}' alt="UPS KPMIM Logo">
+            </div>
+            <h1 class="header-title">UPS KPMIM</h1>
+        </div>
+        <a href="{% url 'user_dashboard' %}" class="return-btn">
+            <i class="fas fa-arrow-left"></i> Return to Dashboard
+        </a>
+    </header>
+
+    <div class="update-booking-container">
+        <h2>Update Booking</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_package_cd">Package:</label>
+                {{ form.package_cd }}
+            </div>
+            <div class="form-group">
+                <label for="id_booking_date">Booking Date:</label>
+                {{ form.booking_date }}
+            </div>
+            <div class="form-group">
+                <label for="id_destination_name">Destination:</label>
+                {{ form.destination_name }}
+            </div>
+            <button type="submit" class="btn btn-update">Update Booking</button>
+        </form>
+        <a href="{% url 'user_dashboard' %}" class="btn btn-cancel">Cancel</a>
+    </div>
+</body>
+</html>

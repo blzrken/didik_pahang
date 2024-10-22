@@ -1,0 +1,375 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url('/static/images/background.png') no-repeat center center fixed; /* Background image with parallax effect */
+    background-size: cover; /* Ensure the background covers the entire viewport */
+    color: #fff;
+    padding-top: 80px; /* To prevent content from hiding behind the header */
+}
+
+
+/* Header section */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    padding: 20px;
+    position: fixed; /* Keep the header fixed */
+    top: -10px;
+    left: 0;
+    width: 100%; /* Make sure it spans the entire width */
+    z-index: 1000; /* Ensure it stays above other elements */
+}
+
+header .logo img {
+    width: 100px;
+}
+
+/* Search bar container */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Spacing from the nav */
+}
+
+.search-input {
+    width: 0;
+    font-family: 'Poppins';
+    padding: 5px;
+    border: 2px solid #4f5839;
+    border-radius: 20px;
+    outline: none;
+    transition: width 0.4s ease;
+    background-color: white;
+    color: #333;
+    opacity: 0;
+    margin-right: 10px;
+}
+
+.search-btn {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.search-container:hover .search-input {
+    width: 200px; /* Expanded width */
+    opacity: 1;
+}
+
+/* Navigation links hover effect */
+nav ul li a:hover {
+    color: #b6cc84; /* Change color on hover */
+    text-decoration: underline; /* Add underline on hover */
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition */
+}
+
+/* Navigation menu */
+nav {
+    margin-top: -30px
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    font-size: larger;
+    gap: 60px;
+    margin-bottom:-5px ;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Search and login section */
+.search-login {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-login input {
+    padding: 5px;
+}
+
+.search-login button, .login-btn {
+    padding: 5px 10px;
+    background-color: #556b2f;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Main content section */
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 60px 40px;
+    margin-top: -90px;
+    min-height: 100vh;
+    align-items: center;
+}
+
+/* Hero section on the left */
+.hero {
+    text-align: left;
+    color: white;
+    flex: 0 0 40%; /* Left section takes up 30% */
+    padding-right: 40px; /* Maintain spacing on the right */
+    padding-left: 60px; /* Add left padding to move it right */
+    border-radius: 10px;
+}
+
+/* Hero section title hover effect */
+.hero h1:hover {
+    color: #b6cc84; /* Change color on hover */
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+/* Hero section paragraph hover effect */
+.hero p:hover {
+    color: #b6cc84; /* Change color on hover */
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+/* Package title hover effect */
+.package h3:hover {
+    color: #b6cc84; /* Change color on hover */
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+.hero h1 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #b6cc84;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.book-btn {
+    background-color: #b6cc84;
+    padding: 15px 30px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* Package section on the right */
+.packages {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Slider section */
+.package-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* Smooth transition */
+    border-radius: 15px; /* Set border radius for rounded corners */
+}
+
+.package img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.package h3 {
+    margin-top: 10px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.package p {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.read-more-btn {
+    background-color: #b6cc84;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Navigation buttons for slider */
+button.prev, button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+button.prev {
+    left: 10px;
+}
+
+button.next {
+    right: 10px;
+}
+
+/* Book Now button hover effect */
+.book-btn:hover,
+.read-more-btn:hover {
+    background-color: #333; /* Darken background on hover */
+    color: #fff; /* Change text color on hover */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+/* Fixing some general spacing */
+h3, p {
+    margin: 0;
+}
+
+/* Making sure the content wraps in case of smaller screens */
+@media screen and (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .hero {
+        text-align: center;
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .packages {
+        align-items: center;
+    }
+
+    .package-slider-container {
+        max-width: 100%;
+    }
+}
+
+.logo-title-container {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center vertically */
+    padding-left: 35px;
+    padding-top: 10px
+}
+
+.header-title {
+    color: #fff; /* Set the title color */
+    font-size: 1.5em; /* Adjust font size */
+    margin-left: 40px; /* Small space between logo and title */
+    margin-top: -10px
+}
+
+/* Update to package-slider-container */
+.package-slider-container {
+    position: relative;
+    max-width: 600px;
+    height: 700px;
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+/* Updated Package Slider for Overlap Effect */
+.package-slider {
+    display: flex;
+    gap: -50px;
+    transition: transform 0.5s ease-in-out;
+    padding-left: 500px;
+    margin-right:20px ;
+}
+
+/* Individual package styling */
+.package {
+    min-width: 300px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    opacity: 0.7;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+/* Package image styling */
+.package img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+
+.package.active {
+    transform: scale(1.05);
+    opacity: 1;
+    z-index: 1;
+}
+
+/* Slider navigation buttons */
+button.prev, button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 1000; /* Ensures the buttons are layered above the slider */
+    opacity: 0.8;  /* Slight transparency for better aesthetics */
+}
+
+button.prev:hover, button.next:hover {
+    opacity: 1;  /* Full opacity on hover */
+}
+
+button.prev {
+    left: 10px;  /* Adjust this to control the exact left position */
+}
+
+button.next {
+    right: 10px;  /* Adjust this to control the exact right position */
+}

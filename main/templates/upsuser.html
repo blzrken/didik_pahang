@@ -1,0 +1,970 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakej - Jelajah Didik Pahang</title>
+    <link rel="icon" href="{% static 'images/logo[1].png' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/styles2.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: url('{% static "images/background.png" %}') no-repeat center center fixed;
+        background-size: cover;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        padding-top: 60px; /* Adjust this value based on your header height */
+    }
+
+    header {
+        background-color: rgba(255, 255, 255, 0);
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+    }
+
+    .logo-title-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo img {
+        height: 80%;
+        margin-right: 10px;
+    }
+
+    .header-title {
+        font-size: 1.5em;
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    .logout-btn {
+        display: inline-block;
+        background-color: #ff4d4d;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 0.9em;
+    }
+
+    .logout-btn:hover {
+        background-color: #ff3333;
+    }
+
+    .welcome-message {
+        background-color: rgba(255, 255, 255, 0);
+        padding: 20px 20px 20px;
+        text-align: center;
+    }
+
+    .welcome-message h1 {
+        color: #12b6b6;
+        margin-bottom: 5px;
+        font-size: 2.5em;
+    }
+
+    .welcome-message p {
+        font-size: 1.2em;
+        color: #fff1f1;
+    }
+
+    .dashboard-container {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+
+    .main-content {
+        width: 70%;
+    }
+
+    .main-content h2 {
+        color: #ffffff;
+        margin-top: -30px;
+        padding-bottom: 10px;
+    }
+
+    .user-profile {
+        width: 28%;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        position: relative;
+        margin-top: -40px;
+        height: auto;
+    }
+
+    .user-profile-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .user-avatar {
+        width: 120px;  /* Increased size */
+        height: 120px; /* Increased size */
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+    }
+
+    .user-profile h2 {
+        margin: 0;
+        font-size: 1.6em; /* Increased font size */
+        color: #333;
+    }
+
+    .booking-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .booking-table th, .booking-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .booking-table th {
+        background-color: #008080;
+        color: white;
+    }
+
+    .booking-table tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .package-cell {
+        width: 30%;
+    }
+
+    .package-info1 {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        padding-right: 20px;
+    }
+
+    .package-image {
+        width: 80px;
+        height: 80px;
+        border-radius: 5px;
+        object-fit: cover;
+        margin-right: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .package-info:hover .package-image {
+        transform: scale(1.1);
+    }
+
+    .action-cell {
+        text-align: right;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 5px;
+    }
+
+    .btn {
+        padding: 8px 12px;
+        border-radius: 4px;
+        text-decoration: none;
+        color: white;
+        font-size: 14px;
+        font-family: 'Poppins', sans-serif;
+        border: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px; /* Fixed width for both buttons */
+        height: 36px; /* Fixed height for both buttons */
+        white-space: nowrap; /* Prevent text from wrapping */
+        overflow: hidden; /* Hide overflowing text */
+        text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+
+    .btn i {
+        margin-right: 5px;
+    }
+
+    .update-btn {
+        background-color: #008080;
+        color: white;
+    }
+
+    .delete-btn {
+        background-color: #ff4d4d;
+        color: white;
+    }
+
+    .user-info {
+        display: grid;
+        gap: 15px;
+    }
+
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .info-label {
+        font-weight: bold;
+        font-size: 1.0em; /* Increased font size */
+        color: #555;
+    }
+
+    .info-value {
+        font-size: 1.0em; /* Increased font size */
+        color: #333;
+    }
+
+    .update-btn-small {
+        background-color: #008080;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .return-btn {
+        background-color: #ffffff;
+        color: #006666;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .return-btn:hover {
+        transition: 0.7s;
+        background-color: #aba9a9;
+    }
+
+    .profile-footer {
+        margin-top: 20px;
+        text-align: end;
+    }
+
+    .action-cell {
+        text-align: right;
+    }
+
+    .action-buttons {
+        display: inline-flex;
+        gap: 5px;
+    }
+
+    .update-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #008080;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+    }
+
+    .update-btn:hover {
+        background-color: #006666;
+    }
+
+    .update-btn i {
+        margin-right: 8px;
+        font-size: 18px;
+    }
+
+    /* Style for the save button */
+    .save-btn {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .save-btn:hover {
+        background-color: #45a049;
+    }
+
+    /* Style for input fields */
+    .info-item input[type="text"],
+    .info-item input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    /* Add some spacing between items */
+    .info-item {
+        margin-bottom: 0px;
+    }
+
+    /* Style for labels */
+    .info-label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .button-group {
+        align-items: end;
+        margin-top: 10px;
+        justify-content: space-between; /* This will space out the buttons evenly */
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px; /* Fixed width for both buttons */
+        height: 36px; /* Fixed height for consistency */
+    }
+
+    .save-btn {
+        background-color: #4CAF50;
+        color: white;
+        margin-top: 0px;
+    }
+
+    .save-btn:hover {
+        background-color: #45a049;
+    }
+
+    .cancel-btn {
+        background-color: #f0f0f0;
+        color: #333;
+        border: 1px solid #ccc;
+    }
+
+    .cancel-btn:hover {
+        background-color: #e0e0e0;
+        border-color: #999;
+    }
+
+    .update-btn-small {
+        background-color: #008CBA;
+        color: white;
+        margin-left: 20px;
+        margin-right: -18px;
+    }
+
+    .update-btn-small:hover {
+        background-color: #007399;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .update-form input[type="text"],
+    .update-form input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    /* Add focus styles for better accessibility */
+    .btn:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 5px;
+        justify-content: flex-end; /* Align buttons to the right */
+    }
+
+    .update-form {
+        max-width: 300px; /* Adjust this value to your preferred width */
+        margin: 0 auto; /* This centers the form if it's narrower than its container */
+    }
+
+    .update-form input[type="text"],
+    .update-form input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: calc(50% - 5px); /* This makes each button take up half the space minus half the gap */
+    }
+
+    .save-btn {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .cancel-btn {
+        background-color: #f0f0f0;
+        color: #333;
+        border: 1px solid #ccc;
+    }
+
+    .name-input {
+        width: 48%; /* Adjust this value to your preferred width */
+        display: inline-block;
+    }
+
+    .name-input:first-of-type {
+        margin-right: 4%; /* Add some space between first name and last name inputs */
+    }
+
+    .update-form {
+        max-width: 300px; /* Adjust this value if needed */
+        margin: 0 auto;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .button-group .btn {
+        width: 48%; /* Make buttons take up almost half the width of the form */
+    }
+
+    .update-form {
+        max-width: 250px; /* Adjust this value to make the form container shorter */
+        margin: 0 auto;
+    }
+
+    .name-input {
+        width: calc(50% - 5px); /* Make each input take up half the width minus half the gap */
+        display: inline-block;
+        box-sizing: border-box;
+    }
+
+    .name-input:first-of-type {
+        margin-right: 10px; /* Add some space between first name and last name inputs */
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .button-group .btn {
+        width: calc(50% - 5px); /* Make buttons take up half the width minus half the gap */
+    }
+
+    .update-form-container {
+        max-width: 250px; /* Match this with your other update forms */
+        margin: 0 auto;
+    }
+
+    .update-form {
+        width: 100%;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: flex-end; /* Align the button to the right */
+        margin-top: 10px;
+    }
+
+    .update-btn-small {
+        width: calc(50% - 5px); /* Make the button width consistent with other buttons */
+    }
+
+    .booking-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .action-cell {
+        width: 200px; /* Adjust this width as needed */
+        padding: 10px;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 5px; /* Reduced gap between buttons */
+    }
+
+    .button-wrapper {
+        flex: 1;
+    }
+
+    .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 6px 10px; /* Reduced padding for smaller buttons */
+        border: none;
+        border-radius: 4px;
+        font-size: 12px; /* Smaller font size */
+        cursor: pointer;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .update-btn {
+        background-color: #008080;
+        color: white;
+    }
+
+    .delete-btn {
+        background-color: #ff4d4d;
+        color: white;
+    }
+
+    .btn i {
+        margin-right: 4px; /* Reduced space between icon and text */
+        font-size: 10px; /* Smaller icon size */
+    }
+
+    /* Ensure the form takes up full width of its wrapper */
+    .button-wrapper form {
+        width: 100%;
+        display: flex;
+    }
+
+    .btn-update-profile {
+        padding: 5px 10px;
+        font-size: 0.9em;
+        background-color: #008080;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-update-profile:hover {
+        background-color: #006666;
+    }
+
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .info-label {
+        font-weight: bold;
+        flex: 0 0 120px; 
+    }
+
+    .info-value {
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .update-form {
+        width: 100%;
+    }
+
+    .name-input {
+        width: calc(50% - 5px);
+        margin-right: 10px;
+    }
+
+    .name-input:last-of-type {
+        margin-right: 0;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .button-group .btn {
+        width: calc(50% - 5px);
+    }
+
+    .no-bookings-message {
+        text-align: center;
+        padding: 20px;
+        background-color: #f8f8f8;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    .no-bookings-message p {
+        font-size: 16px;
+        margin-top: 4px;
+        color: #666;
+    }
+
+    /* Remove scrollbar styles */
+    .user-profile::-webkit-scrollbar {
+        display: none;
+    }
+
+    .table-container {
+        max-height: calc(100vh - 250px);
+        overflow-y: auto;
+        margin-bottom: 20px;
+    }
+
+    .table-container::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .table-container::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .table-container::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 4px;
+    }
+
+    .table-container::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    .booking-table thead {
+        position: sticky;
+        top: 0;
+        background-color: inherit;
+        z-index: 1;
+    }
+
+    /* Modal styles */
+    .modal {
+        z-index: 1050; /* Ensure modal is above other content */
+    }
+
+    .modal-backdrop {
+        z-index: 1040; /* Ensure backdrop is below modal but above other content */
+    }
+
+    .modal-content {
+        background-color: #f8f9fa;
+        border: none;
+        border-radius: 10px;
+        z-index: 1060; /* Ensure modal content is above backdrop */
+    }
+
+    .modal-header {
+        background-color: #008080;
+        color: white;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .modal-title {
+        font-weight: bold;
+    }
+
+    .btn-close {
+        color: white;
+    }
+
+    .modal-body {
+        padding: 20px;
+        font-size: 16px;
+    }
+
+    .modal-footer {
+        border-top: none;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: #ff4d4d;
+    }
+
+    .btn-secondary:hover, .btn-danger:hover {
+        opacity: 0.9;
+    }
+</style>
+<body>
+    <header>
+        <div class="logo-title-container">
+            <div class="logo">
+                <img src='{% static "images/logo[1].png" %}' alt="UPS KPMIM Logo">
+            </div>
+            <h1 class="header-title">UPS KPMIM</h1>
+        </div>
+        <a href="{% url 'welcome' %}" class="return-btn">
+            <i class="fas fa-home"></i> Return to Welcome Page
+        </a>
+    </header>
+
+    <div class="welcome-message">
+        <h1>Welcome to User Dashboard</h1>
+        <p>Hello, {{ user.first_name }}! Manage your account and bookings here.</p>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="main-content">
+            <h2>Your Bookings</h2>
+            {% if bookings %}
+                <div class="table-container">
+                    <table class="booking-table">
+                        <thead>
+                            <tr>
+                                <th>Package</th>
+                                <th>Booking ID</th>
+                                <th>Booking Date</th>
+                                <th>Destination</th>
+                                <th>Package Price</th>
+                                <th>Destination Price</th>
+                                <th>Total Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for booking in bookings %}
+                            <tr>
+                                <td class="package-cell">
+                                    <div class="package-info1">
+                                        {% if booking.package_cd.package_cd == 'A1' %}
+                                            <img src="{% static 'images/ktn188.jpg' %}" alt="Package A1" class="package-image"> 
+                                        {% elif booking.package_cd.package_cd == 'A2' %}
+                                            <img src="{% static 'images/sgjin.jpg' %}" alt="Package A2" class="package-image">
+                                        {% elif booking.package_cd.package_cd == 'B' %}
+                                            <img src="{% static 'images/cherating.jpg' %}" alt="Package B" class="package-image">
+                                        {% elif booking.package_cd.package_cd == 'C' %}
+                                            <img src="{% static 'images/taman.jpg' %}" alt="Package C" class="package-image">
+                                        {% else %}
+                                            <img src="{% static 'images/default-package.jpg' %}" alt="Default Package" class="package-image">
+                                        {% endif %}
+                                        <span>{{ booking.package_cd.package_desc }}</span>
+                                    </div>
+                                </td>
+                                <td>{{ booking.booking_id }}</td>
+                                <td>{{ booking.booking_date }}</td>
+                                <td>{{ booking.destination_name|default:"No Destination Added" }}</td>
+                                <td>RM {{ booking.package_cd.price }}</td>
+                                <td>{% if booking.destination_name %}RM {{ booking.destination_name.price }}{% else %}N/A{% endif %}</td>
+                                <td>RM {{ booking.total_price }}</td>
+                                <td class="action-cell">
+                                    <div class="action-buttons">
+                                        <div class="button-wrapper">
+                                            <a href="{% url 'update_booking' booking.booking_id %}" class="btn update-btn">
+                                                <i class="fas fa-edit"></i> Update
+                                            </a>
+                                        </div>
+                                        <div class="button-wrapper">
+                                            <button type="button" class="btn delete-btn" data-bs-toggle="modal" data-bs-target="#cancelModal{{ booking.booking_id }}">
+                                                <i class="fas fa-trash-alt"></i> Cancel Booking
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Modal for Cancel Booking -->
+                            <div class="modal fade" id="cancelModal{{ booking.booking_id }}" tabindex="-1" aria-labelledby="cancelModalLabel{{ booking.booking_id }}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="cancelModalLabel{{ booking.booking_id }}">Confirm Cancellation</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to cancel this booking?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <form method="post" action="{% url 'delete_booking' booking.booking_id %}" style="display: inline;">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger">Confirm Cancellation</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="no-bookings-message">
+                    <p>No bookings have been made yet.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="user-profile">
+            <div class="user-profile-header">
+                <img src="{% static 'images/avatar.jpg' %}" alt="User Avatar" class="user-avatar">
+                <h2>My Profile</h2>
+            </div>
+            <div class="user-info">
+                <div class="info-item">
+                    <span class="info-label">Name:</span>
+                    <span class="info-value">
+                        {% if update_field == 'name' %}
+                            <form method="post" action="{% url 'update_profile' %}" class="update-form">
+                                {% csrf_token %}
+                                <input type="text" name="first_name" value="{{ user.first_name }}" required>
+                                <input type="text" name="last_name" value="{{ user.last_name }}" required>
+                                <input type="hidden" name="update_field" value="name">
+                                <div class="button-group">
+                                    <button type="submit" class="btn save-btn">Save</button>
+                                    <a href="{% url 'user_dashboard' %}" class="btn cancel-btn">Cancel</a>
+                                </div>
+                            </form>
+                        {% else %}
+                            {{ user.first_name }} {{ user.last_name }}
+                            <form method="get" action="{% url 'user_dashboard' %}" style="display: inline;">
+                                <input type="hidden" name="update_field" value="name">
+                                <button type="submit" class="btn btn-update-profile">Update</button>
+                            </form>
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Username:</span>
+                    <span class="info-value">
+                        {% if update_field == 'username' %}
+                            <form method="post" action="{% url 'update_profile' %}" class="update-form">
+                                {% csrf_token %}
+                                <input type="text" name="username" value="{{ user.username }}" required>
+                                <input type="hidden" name="update_field" value="username">
+                                <div class="button-group">
+                                    <button type="submit" class="btn save-btn">Save</button>
+                                    <a href="{% url 'user_dashboard' %}" class="btn cancel-btn">Cancel</a>
+                                </div>
+                            </form>
+                        {% else %}
+                            {{ user.username }}
+                            <form method="get" action="{% url 'user_dashboard' %}" style="display: inline;">
+                                <input type="hidden" name="update_field" value="username">
+                                <button type="submit" class="btn btn-update-profile">Update</button>
+                            </form>
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Phone Number:</span>
+                    <span class="info-value">
+                        {% if update_field == 'phone_number' %}
+                            <form method="post" action="{% url 'update_profile' %}" class="update-form">
+                                {% csrf_token %}
+                                <input type="text" name="phone_number" value="{{ user.phone_number }}" required>
+                                <input type="hidden" name="update_field" value="phone_number">
+                                <div class="button-group">
+                                    <button type="submit" class="btn save-btn">Save</button>
+                                    <a href="{% url 'user_dashboard' %}" class="btn cancel-btn">Cancel</a>
+                                </div>
+                            </form>
+                        {% else %}
+                            {{ user.phone_number }}
+                            <form method="get" action="{% url 'user_dashboard' %}" style="display: inline;">
+                                <input type="hidden" name="update_field" value="phone_number">
+                                <button type="submit" class="btn btn-update-profile">Update</button>
+                            </form>
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Password:</span>
+                    <span class="info-value">
+                        {% if update_field == 'password' %}
+                            <form method="post" action="{% url 'update_profile' %}" class="update-form">
+                                {% csrf_token %}
+                                <input type="password" name="password" placeholder="New password">
+                                <input type="hidden" name="update_field" value="password">
+                                <div class="button-group">
+                                    <button type="submit" class="btn save-btn">Save</button>
+                                    <a href="{% url 'user_dashboard' %}" class="btn cancel-btn">Cancel</a>
+                                </div>
+                            </form>
+                        {% else %}
+                            ********
+                            <form method="get" action="{% url 'user_dashboard' %}" style="display: inline;">
+                                <input type="hidden" name="update_field" value="password">
+                                <button type="submit" class="btn btn-update-profile">Update</button>
+                            </form>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+            <div class="profile-footer">
+                <a href="{% url 'logout' %}" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Log Out
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

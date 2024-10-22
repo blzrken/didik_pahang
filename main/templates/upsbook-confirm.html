@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation - UPS KPMIM</title>
+    <link rel="icon" href="{% static 'images/logo[1].png' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'css/styles2.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('{% static "images/background.png" %}') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .confirmation-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            overflow: auto;
+        }
+
+        .confirmation-container h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .package-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            object-fit: cover;
+            max-height: 150px;
+        }
+
+        .booking-details {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+            flex-grow: 1;
+            overflow: auto;
+        }
+
+        .booking-detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+
+        .booking-detail-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .booking-detail-icon {
+            font-size: 20px;
+            margin-right: 10px;
+            color: #4CAF50;
+            width: 25px;
+            text-align: center;
+        }
+
+        .booking-detail-content {
+            flex-grow: 1;
+        }
+
+        .booking-detail-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 2px;
+        }
+
+        .booking-detail-value {
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .total-price {
+            background-color: #3a663c;
+            color: white;
+            border-radius: 5px;
+            padding: 5px 10px;
+            display: inline-block;
+        }
+
+        .confirmation-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .confirmation-btn:hover {
+            background-color: #388E3C;
+        }
+    </style>
+</head>
+<body>
+    <header style="z-index: 1000">
+        <div class="logo-title-container">
+            <div class="logo">
+                <img src='{% static "images/logo[1].png" %}' alt="UPS KPMIM Logo">
+            </div>
+            <h1 class="header-title">UPS KPMIM</h1>
+        </div>
+
+        <!-- Logout Button -->
+        <a href="{% url 'logout' %}" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Log Out
+        </a>
+    </header>
+
+    <div class="confirmation-container">
+        <h1>Thank you for your booking!</h1>
+
+        {% if booking.package_cd.package_cd == 'A1' %}
+            <img src="{% static 'images/ktn188.jpg' %}" alt="Package A1" class="package-image">
+        {% elif booking.package_cd.package_cd == 'A2' %}
+            <img src="{% static 'images/sgjin.jpg' %}" alt="Package A2" class="package-image">
+        {% elif booking.package_cd.package_cd == 'B' %}
+            <img src="{% static 'images/cherating.jpg' %}" alt="Package B" class="package-image">
+        {% elif booking.package_cd.package_cd == 'C' %}
+            <img src="{% static 'images/taman.jpg' %}" alt="Package C" class="package-image">
+        {% endif %}
+
+        <div class="booking-details">
+            <div class="booking-detail-item">
+                <i class="fas fa-bookmark booking-detail-icon"></i>
+                <div class="booking-detail-content">
+                    <div class="booking-detail-label">Booking ID</div>
+                    <div class="booking-detail-value">{{ booking.booking_id }}</div>
+                </div>
+            </div>
+            <div class="booking-detail-item">
+                <i class="fas fa-suitcase-rolling booking-detail-icon"></i>
+                <div class="booking-detail-content">
+                    <div class="booking-detail-label">Package Name</div>
+                    <div class="booking-detail-value">{{ booking.package_cd.package_desc }}</div>
+                </div>
+            </div>
+            <div class="booking-detail-item">
+                <i class="fas fa-user booking-detail-icon"></i>
+                <div class="booking-detail-content">
+                    <div class="booking-detail-label">Booked by</div>
+                    <div class="booking-detail-value">{{ booking.name }}</div>
+                </div>
+            </div>
+            <div class="booking-detail-item">
+                <i class="fas fa-calendar-alt booking-detail-icon"></i>
+                <div class="booking-detail-content">
+                    <div class="booking-detail-label">Booking Date</div>
+                    <div class="booking-detail-value">{{ booking.booking_date }}</div>
+                </div>
+            </div>
+            <div class="booking-detail-item">
+                <i class="fas fa-tag booking-detail-icon"></i>
+                <div class="booking-detail-content">
+                    <div class="booking-detail-label">Total Price</div>
+                    <div class="booking-detail-value total-price">RM {{ booking.price }}</div>
+                </div>
+            </div>
+        </div>
+
+        <a href="{% url 'welcome' %}" class="confirmation-btn">Return to Home</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('{% static "images/background.png" %}') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    padding-top: 80px;
+}
+
+/* Header section */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    padding: 20px;
+    position: fixed;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo-title-container {
+    display: flex;
+    align-items: center;
+    padding-left: 35px;
+    padding-top: 10px;
+}
+
+header .logo img {
+    width: 100px;
+}
+
+.header-title {
+    color: #fff;
+    font-size: 1.5em;
+    margin-left: 40px;
+    margin-top: -10px;
+}
+
+/* Navigation menu */
+nav {
+    margin-top: -30px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    font-size: larger;
+    gap: 60px;
+    margin-bottom: -5px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+nav ul li a:hover {
+    color: #b6cc84;
+    text-decoration: underline;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+/* Search bar container */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Spacing from the nav */
+}
+
+.search-input {
+    width: 0;
+    font-family: 'Poppins';
+    padding: 5px;
+    border: 2px solid #4f5839;
+    border-radius: 20px;
+    outline: none;
+    transition: width 0.4s ease;
+    background-color: white;
+    color: #333;
+    opacity: 0;
+    margin-right: 10px;
+}
+
+.search-btn {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.search-container:hover .search-input {
+    width: 200px; /* Expanded width */
+    opacity: 1;
+}
+
+/* About Section */
+.about-section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.fade-in-title {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+    color: #0bac74;
+}
+
+.fade-in-text {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.about-mission-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+    flex-wrap: wrap;
+}
+
+.about-mission, .about-vision {
+    max-width: 400px;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.about-mission h3{
+    color: #7a9632;
+}
+
+.about-vision h3{
+    color: #7a9632;
+}
+
+.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Team Section */
+.team-section {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.team-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.team-member {
+    text-align: center;
+    margin-bottom: 30px;
+    opacity: 1;  /* Make the team members visible immediately */
+    transform: translateY(0);  /* Remove any translation */
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+/* Footer styling */
+.contact-footer {
+    position: relative; /* Change to relative */
+    bottom: 0; /* Ensure it's at the bottom */
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    background-color: #f0f0f0;
+    z-index: 1000; /* Ensure it stays above other elements */
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease;
+}
+
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.footer-icon-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-icon-text i {
+    color: #008080; /* Teal color for icons */
+    font-size: 2em;
+}
+
+.footer-icon-text p {
+    font-size: 1em;
+    color: #333;
+    margin: 0;
+}
+
+/* Footer appears when user scrolls to the bottom */
+.footer-visible {
+    transform: translateY(0); /* Move footer into view */
+    opacity: 1; /* Make footer visible */
+}
+

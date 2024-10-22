@@ -1,0 +1,225 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakej - Jelajah Didik Pahang</title>
+    <link rel="icon" href="{% static 'images/logo[1].png' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles2.css' %}">
+</head>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: url('{% static "images/background.png" %}') no-repeat center center fixed;
+        background-size: cover;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+    }
+    .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .return-btn, .book-btn {
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .return-btn {
+            background-color: #f0f0f0;
+            color: #333;
+            border: 1px solid #ccc;
+        }
+
+        .return-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+    .form-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        max-width: 500px;
+        width: 90%;
+        margin: auto;
+        padding: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .form-container h1 {
+        font-size: 22px;
+        margin-bottom: 10px;
+        color: #333;
+        text-align: center;
+    }
+
+    .package-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        object-fit: cover;
+        max-height: 180px;
+    }
+
+    .form-container form {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .form-container label {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="date"],
+    .form-container button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .form-container button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .form-container button:hover {
+        background-color: #388E3C;
+    }
+
+    .price-section {
+        text-align: right;
+        margin-top: 10px;
+    }
+
+    .price-value {
+        font-size: 22px;
+        font-weight: bold;
+        color: #00630e;
+        padding: 8px 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+    }
+
+    .price-value:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    span {
+        color: brown;
+    }
+</style>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo-title-container">
+            <div class="logo">
+                <img src="{% static 'images/logo[1].png' %}" alt="UPS KPMIM Logo">
+            </div>
+            <h1 class="header-title">UPS KPMIM</h1>
+        </div>
+
+        <a href="{% url 'logout' %}" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i>
+            Log Out
+        </a>
+    </header>
+
+    <div class="form-container">
+        <h1>Booking for: <span>{{ package.package_desc }}</span></h1>
+
+        {% if package.package_cd == 'A1' %}
+            <img src="{% static 'images/ktn188.jpg' %}" alt="Package A1" class="package-image">
+        {% elif package.package_cd == 'A2' %}
+            <img src="{% static 'images/sgjin.jpg' %}" alt="Package A2" class="package-image">
+        {% elif package.package_cd == 'B' %}
+            <img src="{% static 'images/cherating.jpg' %}" alt="Package B" class="package-image">
+        {% elif package.package_cd == 'C' %}
+            <img src="{% static 'images/taman.jpg' %}" alt="Package C" class="package-image">
+        {% endif %}
+
+        <div class="button-container">
+            <a href="{% url 'package' %}" class="return-btn">
+                <i class="fas fa-arrow-left"></i> Cancel
+            </a>
+        </div>
+
+        <form method="post" action="{% url 'book_package' package_cd=package.package_cd %}">
+            {% csrf_token %}
+            
+
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <div>
+                <label for="id_name">Full Name</label>
+                {{ form.name }}
+            </div>
+            
+            <div>
+                <label for="id_booking_date">Booking Date</label>
+                {{ form.booking_date }}
+            </div>
+
+            <button type="submit">Book Package</button>
+
+            <!-- Price Section -->
+            <div class="price-section">
+                <p class="price-value">RM {{ package.price }}</p>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

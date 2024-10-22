@@ -1,0 +1,349 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakej - Jelajah Didik Pahang</title>
+    <link rel="icon" href="{% static 'images/logo[1].png' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles2.css' %}">
+</head>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: url('{% static "images/background.png" %}') no-repeat center center fixed;
+        background-size: cover;
+        color: #fff;
+        padding-top: 80px;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.8);
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .modal-content {
+        background-color: #f0f8ff;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        font-family: 'Poppins', sans-serif;
+        width: 85%;
+        max-width: 600px;
+        animation: slideIn 0.7s ease;
+    }
+
+    .modal-content p {
+        color: #333;
+        margin-bottom: 0px;
+    }
+
+    input[type="text"], button {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        border: none;
+        font-size: 16px;
+        color: #333;
+    }
+
+    input[type="submit"], button {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 18px;
+        padding: 15px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    input[type="submit"]:hover, button:hover {
+        background-color: #388E3C;
+    }
+
+    form {
+        color: #2b2b2b;
+        font-weight: bolder;
+    }
+    .close, .close-confirmation {
+        color: #aaa;
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        font-size: 28px;
+        cursor: pointer;
+    }
+
+    .close:hover, .close-confirmation:hover {
+        color: black;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    /* Footer styling */
+    .contact-footer {
+        background-color: #ffffffcb;
+        position: fixed;
+        bottom: -150px; /* Hidden at first */
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.5s ease;
+        z-index: 1000;
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+    }
+
+    .footer-icon-text {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .footer-icon-text i {
+        color: #008080; /* Teal color for icons */
+        font-size: 2em;
+    }
+
+    .footer-icon-text p {
+        font-size: 1em;
+        color: #333;
+        margin: 0;
+    }
+
+
+    .user-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .user-dashboard-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 12px;
+        border-radius: 20px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #008080;
+        color: white;
+        border: 2px solid #2faa89;
+    }
+
+    .user-dashboard-btn:hover {
+        background-color: #006666;
+        border-color: #218e7a;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .user-dashboard-btn i {
+        font-size: 16px;
+        margin-right: 6px;
+    }
+
+    @media (max-width: 768px) {
+        .user-dashboard-btn {
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+
+        .user-dashboard-btn i {
+            font-size: 14px;
+            margin-right: 4px;
+        }
+
+        .user-dashboard-btn .username {
+            max-width: 60px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    .carousel-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .carousel-image.active {
+        opacity: 1;
+    }
+</style>
+<body>
+    <!-- Header -->
+    <header style="z-index: 1000">
+        <div class="logo-title-container">
+            <div class="logo">
+                <img src="{% static 'images/logo[1].png' %}" alt="UPS KPMIM Logo">
+            </div>
+            <h1 class="header-title">UPS KPMIM</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'welcome' %}">Home</a></li>
+                <li><a href="{% url 'package' %}" style="color:#b6cc84;">Packages</a></li>
+                <li><a href="{% url 'upsdestination' %}">Add Destination</a></li>
+                <li><a href="{% url 'about' %}">About Us</a></li>
+            </ul>
+        </nav>
+
+            <!-- User Dashboard Button -->
+            <a href="{% url 'user_dashboard' %}" class="user-dashboard-btn">
+                <i class="fas fa-user-circle"></i> <!-- User Icon -->
+                <span class="username">{{ user.username }}</span>
+            </a>
+
+    </header>
+
+    <!-- Content Section -->
+    <section class="packages-section">
+        <div class="packages-header">
+            <h1>PACKAGES</h1>
+        </div>
+        <div class="package-title" id="pakej-a">
+            <h1>PACKAGE A DAYTRIP</h1>
+        </div>
+        <div class="packages-container">
+            <!-- Package A1 Kuantan -->
+            <div class="package-card">
+                <div class="carousel-container">
+                    <img src="{% static 'images/ktn188.jpg' %}" alt="Package A1 Kuantan" class="carousel-image active">
+                    <img src="{% static 'images/petro.jpg' %}" alt="Package A1 Kuantan" class="carousel-image">
+                    <img src="{% static 'images/batik.jpg' %}" alt="Package A1 Kuantan" class="carousel-image">
+                    <img src="{% static 'images/tc.jpg' %}" alt="Package A1 Kuantan" class="carousel-image">
+                </div>
+                <h2>PACKAGE A1 KUANTAN CITY</h2>
+                <h3>RM 75</h3>
+                <p>Visit Kampung Batik Semulajadi, enjoy interactive fun at Petrosains PlaySmart, and pray at the State Mosque. Relax at Teluk Cempedak, enjoy views from Menara 188, see local street art, and enjoy riverside views. A delicious lunch is provided!</p>
+                <a href="{% url 'book_package' 'A1' %}" class="btn-book" style="text-decoration: none; color: white;">
+                    Book Now
+                </a>
+            </div>
+
+            <!-- Package A2 Sungai Lembing -->
+            <div class="package-card">
+                <div class="carousel-container">
+                    <img src="{% static 'images/sgjin.jpg' %}" alt="Package A2 Sungai Lembing" class="carousel-image active">
+                    <img src="{% static 'images/cina.jpg' %}" alt="Package A2 Sungai Lembing" class="carousel-image">
+                    <img src="{% static 'images/pasirput.jpg' %}" alt="Package A2 Sungai Lembing" class="carousel-image">
+                    <img src="{% static 'images/museum.JPG' %}" alt="Package A2 Sungai Lembing" class="carousel-image">
+                </div>
+                <h2>PACKAGE A2 SUNGAI LEMBING</h2>
+                <h3>RM 75</h3>
+                <p>Join our Sungai Lembing tour! Enjoy a 4x4 adventure through lush landscapes, bathe in the clear waters of Sungai Jin, and cross the Suspension Bridge. Visit the Chinese Village, relax at Pasir Puteri, and explore the Sungai Lembing Museum. Lunch is provided!</p>
+                <a href="{% url 'book_package' 'A2' %}" class="btn-book" style="text-decoration: none; color: white;">
+                    Book Now
+                </a>
+            </div>
+        </div>
+        <br><br>
+        <div class="package-title2">
+            <h1 id="pakej-b">PACKAGE B</h1>
+        </div>
+        <div class="package-card-horizontal">
+            <div class="package-info">
+                <h2>2 DAYS & 1 NIGHT STAY</h2>
+                <ul style="list-style-type: disc; padding-left: 20px; color: #2b2b2b; font-size: 18px; line-height: 1.8; font-family: Poppins, sans-serif; margin-bottom: 50px; text-align: left;">
+                    <li><strong>2 Days 1 Night accommodation at Cherating Resort.</strong></li>
+                    <li><strong>Visit to MOCA Museum (Museum of Contemporary Art) to admire various contemporary artworks.</strong></li>
+                    <li><strong>Explore beautiful murals in the creative Kuantan Street Art area.</strong></li>
+                    <li><strong>Local food provided.</strong></li>
+                </ul> 
+                <p>Accommodation provided with exciting experiences, including visits to MOCA, admiring batik art at Kampung Batik Semulajadi, and exploring the uniqueness of Street Art & Esplanade. Enjoy the challenge of climbing Bukit Panorama, the beauty of Pelangi Waterfall, the freshness of Sungai Jin, and white sand at Pasir Puteri. Don't forget to stop by Sungai Lembing Museum to learn about local history!</p>
+                
+                <div class="padubeb">
+                    <h3>RM 180</h3>
+                    <a href="{% url 'book_package' 'B' %}" class="btn-book" style="text-decoration: none; color: white;">
+                        Book Now
+                    </a>
+                </div>
+            </div>
+        
+            <!-- Images for the carousel (right side) -->
+            <div class="carousel-container-horizontal">
+                <img src="{% static 'images/cherating.jpg' %}" alt="Pakej B Cherating" class="carousel-image active">
+                <img src="{% static 'images/street.jpg' %}" alt="Pakej B Cherating" class="carousel-image">
+                <img src="{% static 'images/moca.webp' %}" alt="Pakej B Cherating" class="carousel-image">
+                <img src="{% static 'images/bukit.png' %}" alt="Pakej B Cherating" class="carousel-image">
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="package-title3" id="pakej-c">
+            <h1>PACKAGE C</h1>
+        </div>
+        <div class="package-card-horizontal" >
+            <!-- Images for the carousel (right side) -->
+            <div class="carousel-container-horizontal2">
+                <img src="{% static 'images/taman.jpg' %}" alt="Pakej B Cherating" class="carousel-image active">
+                <img src="{% static 'images/hotel.jpg' %}" alt="Pakej B Cherating" class="carousel-image">
+                <img src="{% static 'images/water.jpg' %}" alt="Pakej B Cherating" class="carousel-image">
+                <img src="{% static 'images/moca2.jpg' %}" alt="Pakej B Cherating" class="carousel-image">
+            </div>
+            <div class="package-info">
+                <h2>3 DAYS & 2 NIGHTS STAY</h2>
+                <div class="padubeb1">
+                    <ul style="list-style-type: disc; padding-left: 20px; color: #2b2b2b; font-size: 18px; line-height: 1.8; font-family: Poppins, sans-serif; margin-bottom: 100px; text-align: left;">
+                        <li><strong>3 days 2 nights accommodation at Zenith Hotel, Kuantan</strong></li>
+                        <li><strong>Challenging activities for water sports enthusiasts at Sungai Lembing.</strong></li>
+                        <li><strong>Additional experience exploring flora and fauna at Taman Negara.</strong></li>
+                        <li><strong>Relaxation at peaceful beaches and rivers.</strong></li>
+                        <li><strong>Visit to MOCA Museum (Museum of Contemporary Art) - Appreciating amazing contemporary art.</strong></li>
+                    </ul>
+                    <p>This 3 days 2 nights package offers the best opportunity to combine cultural experiences, natural adventures, and relaxation in Pahang. From the uniqueness of batik art and visits to local museums to the challenges of hill climbing and the freshness of waterfalls, this package offers a variety of exciting activities to fulfill every traveler's desires!</p>
+                    <h3>RM 280</h3>
+                    <a href="{% url 'book_package' 'C' %}" class="btn-book" style="text-decoration: none; color: white;">
+                        Book Now
+                    </a>
+                </div>
+            </div>
+        
+            
+        </div>
+
+    </section>
+
+    <script src="{% static 'js/package.js' %}"></script>
+</body>
+</html>

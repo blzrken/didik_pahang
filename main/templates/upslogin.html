@@ -1,0 +1,235 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Jelajah Didik Pahang</title>
+    <link rel="stylesheet" href="{% static 'css/styles3.css' %}">
+    <link rel="icon" href="{% static 'images/logo[1].png' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('{% static "images/background.png" %}') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9); 
+            padding: 40px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
+            max-width: 400px;
+            width: 100%;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #333;
+        }
+        .form-group {
+            position: relative;
+        }
+        .form-group label {
+            color: #333;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+        .form-group input:focus {
+            border-color: #5cb85c;
+            background-color: #fff;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .unhide-password-btn {
+            position: absolute;
+            right: 15px;
+            top: 55%; 
+            transform: translateY(-20%);
+            cursor: pointer;
+            color: #555;
+        }
+        
+        .image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 600px;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the image covers the container without distortion */
+            border-top-right-radius: 15px; /* Smooth border at the corner */
+            border-bottom-right-radius: 15px;
+        }
+        p {
+            text-align: center;
+            margin-top: 0px;
+        }
+        a {
+            color: #5cb85c;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            background-color: rgba(255, 0, 0, 0.1);
+            border-left: 4px solid #ff4d4d;
+            padding: 10px;
+            color: #ff4d4d;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            position: relative;
+            animation: slide-in 0.5s ease;
+        }
+        .error-message:before {
+            content: '⚠'; /* Custom warning icon */
+            position: absolute;
+            left: -30px;
+            font-size: 18px;
+            color: #ff4d4d;
+            animation: bounce 0.8s infinite;
+        }
+        @keyframes slide-in {
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .success-message {
+            background-color: rgba(92, 184, 92, 0.1);
+            border-left: 4px solid #5cb85c;
+            padding: 10px;
+            color: #3c763d;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            position: relative;
+            animation: slide-in 0.5s ease;
+        }
+        .success-message:before {
+            content: '✓'; /* Checkmark icon */
+            position: absolute;
+            left: -30px;
+            font-size: 18px;
+            color: #5cb85c;
+            animation: bounce 0.8s infinite;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-title-container">
+            <div class="logo">
+                <img src='{% static "images/logo[1].png" %}' alt="UPS KPMIM Logo">
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="form-container">
+            <h2>Welcome back to Jelajah Didik Pahang!</h2>
+
+            <!-- Messages Display -->
+            {% if messages %}
+                {% for message in messages %}
+                    {% if 'profile_update' not in message.tags %}
+                        {% if message.tags == 'error' %}
+                            <div class="error-message">
+                                <p>{{ message }}</p>
+                            </div>
+                        {% elif message.tags == 'success' %}
+                            <div class="success-message">
+                                <p>{{ message }}</p>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+
+                <div class="form-group">
+                    {{ form.login_identifier.label_tag }} {{ form.login_identifier }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.password.label_tag }} {{ form.password }}
+                    <span class="unhide-password-btn" onclick="togglePassword()">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+
+                <button type="submit">Login</button>
+            </form>
+
+            <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+        </div>
+        <!-- Image container -->
+        <div class="image-container">
+            <img src="{% static 'images/logreg.jpg' %}" alt="Login">
+        </div>
+    </div>
+    
+    <script>
+        function togglePassword() {
+            var passwordField = document.querySelector('input[name="password"]');
+            var passwordIcon = document.querySelector('.unhide-password-btn i');
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                passwordIcon.classList.remove("fa-eye");
+                passwordIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                passwordIcon.classList.remove("fa-eye-slash");
+                passwordIcon.classList.add("fa-eye");
+            }
+        }
+    </script>
+</body>
+</html>

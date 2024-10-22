@@ -1,0 +1,221 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Jelajah Didik Pahang</title>
+    <link rel="icon" href="{% static 'images/logo[1].png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+</head>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: url('{% static "images/background.png" %}') no-repeat center center fixed;
+        background-size: cover;
+        color: #fff;
+        padding-top: 100px;
+    }
+
+    .user-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .user-dashboard-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 12px;
+        border-radius: 20px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #008080;
+        color: white;
+        border: 2px solid #2faa89;
+    }
+
+    .user-dashboard-btn:hover {
+        background-color: #006666;
+        border-color: #218e7a;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .user-dashboard-btn i {
+        font-size: 16px;
+        margin-right: 6px;
+    }
+
+    @media (max-width: 768px) {
+        .user-dashboard-btn {
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+
+        .user-dashboard-btn i {
+            font-size: 14px;
+            margin-right: 4px;
+        }
+
+        .user-dashboard-btn .username {
+            max-width: 60px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+</style>
+<body>
+    <header>
+        <div class="logo-title-container">
+            <div class="logo">
+                <img src="{% static 'images/logo[1].png' %}" alt="UPS KPMIM Logo">
+            </div>
+            <h1 class="header-title">UPS KPMIM</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'welcome' %}">Home</a></li>
+                <li><a href="{% url 'package' %}">Packages</a></li>
+                <li><a href="{% url 'upsdestination' %}">Add Destination</a></li>
+                <li><a href="{% url 'about' %}" style="color:#b6cc84">About Us</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="{% url 'user_dashboard' %}" class="user-dashboard-btn">
+                <i class="fas fa-user-circle"></i>
+                <span class="username">{{ user.username }}</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <section class="about-section">
+        <div class="about-content">
+            <h2 class="fade-in-title">About Jelajah Didik Pahang</h2>
+            <p class="fade-in-text">KPMIM Tourism Cooperative is a student organization established to provide high-quality and affordable travel opportunities to the community of higher education and school students. We adhere to cooperative principles that promote collaboration, integrity, and excellent customer service.</p>
+            <div class="about-mission-container">
+                <div class="about-mission fade-in">
+                    <h3>Our Mission</h3>
+                    <p>Our mission is to offer educational and enjoyable travel experiences while fostering awareness of local history, culture, and natural beauty. We are also committed to providing students with opportunities to develop management and leadership skills through involvement in tourism activities.</p>
+                </div>
+                <div class="about-vision fade-in">
+                    <h3>Our Vision</h3>
+                    <p>To become a leader in providing affordable and informative travel packages for students, as well as promoting local tourism and culture.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team section with animation -->
+    <section class="team-section">
+        <h2 class="fade-in-title">Meet Our Team</h2>
+        <div class="team-container">
+            <div class="team-member slide-up">
+                <img src="{% static 'images/di.jpg' %}" alt="Team Member 1">
+                <h3>Lutfil Hadi</h3>
+                <p>Lead Coordinator</p>
+            </div>
+            <div class="team-member slide-up">
+                <img src="{% static 'images/yam.jpg' %}" alt="Team Member 2">
+                <h3>Maryam Adlina</h3>
+                <p>Outreach Specialist</p>
+            </div>
+            <div class="team-member slide-up">
+                <img src="{% static 'images/khallis.jpg' %}" alt="Team Member 2">
+                <h3>Khallis Syahir</h3>
+                <p>Outreach Specialist</p>
+            </div>
+            <div class="team-member slide-up">
+                <img src="{% static 'images/wish.jpg' %}" alt="Team Member 2">
+                <h3>Darwish</h3>
+                <p>Outreach Specialist</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer Section -->
+    <footer class="contact-footer">
+        <div class="footer-content">
+            <div class="footer-icon-text">
+                <i class="fas fa-phone-alt"></i>
+                <p>018-340 2305 (Hadi)<br>011-1204 9272 (Adlina)</p>
+            </div>
+            <div class="footer-icon-text">
+                <i class="fab fa-instagram"></i>
+                <p>UPSKPMIM (IG/TIKTOK)</p>
+            </div>
+            <div class="footer-icon-text">
+                <i class="fas fa-map-marker-alt"></i>
+                <p>©KPMIMKUANTANBERHAD</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        const faders = document.querySelectorAll('.fade-in, .fade-in-title, .fade-in-text, .fade-in-footer');
+
+        const appearOptions = {
+            threshold: 0.5,  // You can adjust this threshold to determine when the fade-in occurs
+            rootMargin: "0px 0px -100px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function (entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('appear');  // Add the 'appear' class when in view
+                    observer.unobserve(entry.target);  // Stop observing once the class is added
+                }
+            });
+        }, appearOptions);
+
+        // Observe the fade-in elements including the footer
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
+
+        window.addEventListener('scroll', function () {
+            var footer = document.querySelector('.contact-footer');
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                footer.classList.add('footer-visible'); // Add class to fade in
+            } else {
+                footer.classList.remove('footer-visible'); // Remove class to fade out
+            }
+        });
+
+        window.addEventListener('scroll', function () {
+            const teamMembers = document.querySelectorAll('.team-member');
+            const triggerPoint = window.innerHeight * 0.8; // Adjust the trigger point as necessary
+
+            teamMembers.forEach(member => {
+                const memberPosition = member.getBoundingClientRect().top;
+
+                if (memberPosition < triggerPoint) {
+                    member.classList.add('visible');
+                } else {
+                    member.classList.remove('visible');
+                }
+            });
+        });
+
+        // Trigger the scroll event on page load to show the members that are already in view
+        window.dispatchEvent(new Event('scroll'));
+    </script>
+</body>
+
+</html>

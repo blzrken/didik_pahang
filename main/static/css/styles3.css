@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('{% static "images/background.png" %}') no-repeat center center fixed; /* Background image */
+    background-size: cover; /* Ensure the background covers the entire viewport */
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    display: flex;
+    justify-content: flex-start; /* Align items to the start (left) */
+    align-items: center; 
+    background-color: transparent;
+    padding: 5px;
+    position: fixed; 
+    top: 0; /* Align to the top of the viewport */
+    left: 0;
+    width: 100%; 
+    z-index: 1000; 
+}
+
+header .logo img {
+    width: 100px; 
+    margin: 30px;
+}
+
+.logo-title-container {
+    display: flex;
+    align-items: center; /* Center vertically */
+    margin-left: 0px; 
+    padding: 3px;
+}
+
+.logo img {
+    width: 50px; /* Adjust logo size */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 8px; /* Space between logo and title */
+}
+
+.header-title {
+    font-size: 16px; /* Adjust font size of title */
+    color: white; /* Ensure the title is visible on the background */
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    width: 60%; /* Adjusted width for the container to resemble the second layout */
+    max-width: 800px; /* Lower max width for a more compact look */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Keep the shadow */
+    border-radius: 10px;
+    overflow: hidden;
+    margin: auto; /* Center the container */
+}
+
+.form-container {
+    flex: 1; /* Same as before, but now it will take 50% of the space */
+    padding: 15px; /* Further reduced padding */
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Changed to flex-start for better space utilization */
+    overflow-y: auto; /* Add scroll if content overflows */
+}
+
+.image-container {
+    flex: 1; /* Same width ratio as the form container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers its container without distortion */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 10px; /* Further reduced margin */
+    font-size: 1.3em; /* Smaller font size */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-bottom: 8px; /* Further reduced margin */
+    padding: 6px; /* Further reduced padding */
+    border: 1px solid #ccc; /* Add border for inputs */
+    border-radius: 4px;
+    font-size: 0.85em; /* Smaller font size */
+}
+
+button {
+    padding: 7px; /* Further reduced padding */
+    background-color: #28a745; /* Green color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em; /* Smaller font size */
+    margin-top: 5px; /* Added small top margin */
+}
+
+button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+p {
+    text-align: center;
+    font-size: 0.85em; /* Smaller font size */
+    margin-top: 8px; /* Reduced margin top */
+}
+
+a {
+    color: #007bff; /* Bootstrap primary color for links */
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: none; /* Remove underline on hover */
+}
+
+/* Password visibility toggle */
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-container input {
+    width: 100%;
+}
+
+.toggle-password-btn {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 12px; /* Smaller font size */
+}

@@ -1,0 +1,752 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Webkit Browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #b6cc84;
+    border-radius: 10px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('{% static "images/background.png" %}') no-repeat center center fixed; /* Background image with parallax effect */
+    background-size: cover; /* Ensure the background covers the entire viewport */
+    color: #fff;
+    padding-top: 80px; /* To prevent content from hiding behind the header */
+}
+
+
+/* Header section */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    padding: 20px;
+    position: fixed; /* Keep the header fixed */
+    top: -10px;
+    left: 0;
+    width: 100%; /* Make sure it spans the entire width */
+    z-index: 1000; /* Ensure it stays above other elements */
+}
+
+.header-title {
+    color: #fff; /* Set the title color */
+    font-size: 1.5em; /* Adjust font size */
+    margin-left: 40px; /* Small space between logo and title */
+    margin-top: -10px
+}
+
+header .logo img {
+    width: 100px;
+}
+
+/* Search bar container */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Spacing from the nav */
+}
+
+.search-input {
+    width: 0;
+    font-family: 'Poppins';
+    padding: 5px;
+    border: 2px solid #4f5839;
+    border-radius: 20px;
+    outline: none;
+    transition: width 0.4s ease;
+    background-color: white;
+    color: #333;
+    opacity: 0;
+    margin-right: 10px;
+}
+
+.search-btn {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.search-container:hover .search-input {
+    width: 200px; /* Expanded width */
+    opacity: 1;
+}
+
+/* Navigation links hover effect */
+nav ul li a:hover {
+    color: #b6cc84; /* Change color on hover */
+    text-decoration: underline; /* Add underline on hover */
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition */
+}
+
+/* Navigation menu */
+nav {
+    margin-top: -30px
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    font-size: larger;
+    gap: 60px;
+    margin-bottom:-5px ;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Search and login section */
+.search-login {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-login input {
+    padding: 5px;
+}
+
+.search-login button, .login-btn {
+    padding: 5px 10px;
+    background-color: #556b2f;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+/* Main Section */
+.packages-section {
+    padding: 50px 40px;
+    text-align: center;
+    margin-top: -50px;
+}
+
+.package-title h1 {
+    font-size: 2.5em;
+    color: #b6cc84;
+    margin-bottom: 50px;
+}
+
+.package-title2 h1 {
+    font-size: 3.5em;
+    color: #b6cc84;
+    margin-bottom: 10px;
+}
+
+.package-title3 h1 {
+    font-size: 3.5em;
+    color: #b6cc84;
+    margin-bottom: 10px;
+    margin-top: 3   0px;
+}
+
+/* Package Cards */
+.packages-container {
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: -30px;
+}
+
+.package-card {
+    background-color: rgba(255, 255, 255, 0.856);
+    border-radius: 15px;
+    padding: 20px;
+    width: 1000px;
+    height: 520px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #333;
+    position: relative;
+    overflow: hidden; /* Ensure images don't overflow */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.package-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.package-card.hidden {
+    transform: translateY(50px); /* Add an initial offset for scroll effect */
+}
+
+
+.package-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.package-card h3 {
+    font-size: 1.5em;
+    color: #5a8655;
+    margin-bottom: 20px;
+}
+
+.package-card ul {
+    list-style-type: disc;
+    text-align: left;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.package-card ul li {
+    margin-bottom: 10px;
+}
+
+.btn-book {
+    display: inline-block;
+    background-color: #b6cc84;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.btn-book:hover {
+    background-color: #8faa5b;
+}
+
+.logo-title-container {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center vertically */
+    padding-left: 35px;
+    padding-top: 10px
+}
+
+/* Carousel Container Styles */
+.carousel-container {
+    width: 100%; /* Ensure the carousel container spans the full width of the card */
+    height: 250px; /* Set a fixed height for the carousel */
+    overflow: hidden; /* Hide overflow from images that go beyond the container */
+    position: relative; /* Position relative to control absolute positioning of images */
+    border-radius: 10px; /* Give it rounded corners for a modern look */
+}
+
+
+
+/* Carousel images inside the card */
+.carousel-image {
+    width: 100%; /* Images should take up the full width of the container */
+    height: 100%; /* Make the images fit the height of the container */
+    object-fit: cover; /* Ensures the image covers the container without stretching */
+    position: absolute; /* Position images on top of each other */
+    top: 0;
+    left: 0;
+    opacity: 0; /* Hide all images by default */
+    transition: opacity 2s ease-in-out; /* Smooth transition for image fades */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.carousel-image.active {
+    opacity: 1; /* Show active image */
+}
+
+/* Additional content styles for cards */
+h3 {
+    margin-top: 0px;
+    margin-bottom: -10px;
+    font-size: 1.5em;
+    color: #5a8655;
+}
+
+p {
+    margin-top: 0px ;
+    color: #333;
+}
+
+
+.btn-book:hover {
+    background-color: #8faa5b;
+}
+
+/* Package card horizontal layout */
+.package-card-horizontal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.855);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden; /* Ensure images don't overflow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.package-card-horizontal p {
+    text-align:center;
+}
+
+/* Package information on the left */
+.package-info {
+    flex: 1;
+    padding-right: 20px;
+    padding-left: 20px;
+    height: 500px;
+}
+
+.package-info h2, .package-info h3 {
+    margin-bottom: 10px;
+}
+
+.package-info p {
+    margin-bottom: 20px;
+}
+
+/* Carousel container for horizontal layout */
+.carousel-container-horizontal2 {
+    width: 50%; /* Make the image section take half of the card width */
+    height: 800px; /* Adjust height as necessary */
+    margin-left: -20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-container-horizontal {
+    width: 50%; /* Make the image section take half of the card width */
+    height: 800px; /* Adjust height as necessary */
+    margin-right: -20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.package-card-horizontal h3{
+    text-align: right;
+    margin-bottom: -10px;
+}
+
+.package-card-horizontal .btn-book{
+    margin-left: 530px;
+}
+
+.carousel-container-horizontal img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    border-radius: 10px;
+}
+
+.carousel-container-horizontal img.active {
+    opacity: 1;
+}
+
+/* General button style */
+.btn-book {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-family: 'Poppins';
+}
+
+.btn-book:hover {
+    background-color: #218838;
+}
+
+.package-card-horizontal h2 {
+    font-size: 2.0em;
+    color: #080b08;
+    margin-bottom: 20px;
+}
+
+/* Packages Header Styling */
+.packages-header {
+    text-align: center;
+    margin: 0px 0; /* Add some margin above and below the title */
+}
+
+.packages-header h1 {
+    font-size: 48px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: #2a9d8f; /* You can change the color to suit your design */
+    text-transform: uppercase; /* Makes the text uppercase */
+    letter-spacing: 2px; /* Adds some spacing between the letters */
+    position: relative;
+    display: inline-block;
+}
+
+.packages-header h1::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 4px;
+    background-color: #2a9d8f;
+    bottom: 0px; /* Position the line slightly below the text */
+    left: 25%;
+}
+
+.package-card {
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+/* Scroll Animation Active State */
+.package-card.show, .package-card-horizontal.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.package-card-horizontal {
+    opacity: 0;
+    height: 600px;
+    transform: translateX(-100px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.package-card.show:hover {
+    transform: scale(1.05); /* Scale up the card slightly */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+.package-card-horizontal.show:hover {
+    transform:scale(1.02); /* Scale up the card slightly */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+.carousel-container-horizontal img, .carousel-container-horizontal2 img {
+    width: 100%; /* Images should take up the full width of the container */
+    height: 100%; /* Make the images fit the height of the container */
+    object-fit: cover; /* Ensures the image covers the container without stretching */
+    position: absolute; /* Position images on top of each other */
+    top: 0;
+    left: 0;
+    opacity: 0; /* Hide all images by default */
+    transition: opacity 1s ease-in-out; /* Smooth transition for image fades */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.carousel-container-horizontal img.active, .carousel-container-horizontal2 img.active {
+    opacity: 1; /* Show active image */
+}
+
+.padubeb {
+    margin-top: 10px;
+}
+
+.padubeb .btn-book, .padubeb h3 {
+    margin-top: 10px;
+    text-align: right;
+    margin-bottom: 10px
+}
+
+.padubeb .btn-book {
+    margin-right: -30px;
+}
+
+.padubeb1 .btn-book, .padubeb1 h3 {
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 10px
+}
+
+.padubeb1 h3 {
+    text-align:right;
+    
+}
+
+.padubeb1 .btn-book {
+    margin-right: -30px;
+}
+
+.padubeb1 p {
+    margin-top: -60px;
+}
+
+/* Modal container styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: rgba(161, 204, 165, 0.837); /* Keep background color */
+    margin: 5% auto;
+    padding: 20px 30px; /* Increase padding for better spacing */
+    border: none; /* Remove border for cleaner look */
+    width: 90%;
+    max-width: 600px;
+    border-radius: 10px;
+    word-wrap: break-word;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add subtle shadow for depth */
+}
+
+.modal h2 {
+    white-space: normal;
+    color: #000000; /* Softer green color for title */
+    font-size: 26px; /* Slightly larger font size */
+    margin-bottom: 20px; /* Add spacing between title and content */
+    text-align: center; /* Center the title */
+}
+
+.modal p {
+    color: #d3f0da; /* Softer, lighter text color */
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    text-align: left;
+    margin-bottom: 20px; /* Add more space between paragraphs */
+}
+
+.modal p strong {
+    color: #b6cc84; /* Highlight certain texts like "Package Name" */
+}
+
+.btn-confirm {
+    margin-top: 20px; /* Add some space above the button */
+}
+
+.close, .close-confirmation {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close-confirmation:hover,
+.close:focus, .close-confirmation:focus {
+    color: black;
+    cursor: pointer;
+}
+
+.btn-submit, .btn-confirm {
+    background-color: #538d55;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.btn-submit:hover, .btn-confirm:hover {
+    background-color: #143d16;
+}
+
+.btn-confirm {
+    display: block;
+    width: 100%;
+    font-family: 'Poppins';
+    background-color: #538d55;
+    color: white;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.btn-confirm:hover {
+    background-color: #143d16;
+}
+
+.close, .close-confirmation {
+    color: #fff;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: -10px; /* Bring close button in slightly */
+}
+
+.close:hover, .close-confirmation:hover {
+    color: #ff6b6b;
+    cursor: pointer;
+}
+
+.close:focus, .close-confirmation:focus {
+    outline: none; /* Remove focus outline */
+}
+
+/* Adjust padding and alignment for package details */
+.modal-content p {
+    margin-bottom: 25px;
+}
+
+.modal-content p strong {
+    font-weight: bold;
+    color: #3a4226;
+}
+
+.modal-content p {
+    font-size: 16px;
+    color: #fbfffc;
+    line-height: 1.6;
+}
+
+/* Animation for modal fade-in */
+.modal {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+input[type="text"] {
+    width: 100%; /* Full width */
+    padding: 15px 40px; /* Padding for better spacing and space for icons */
+    margin: 10px 0; /* Margin for spacing between elements */
+    border: none; /* No border */
+    border-radius: 25px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    background: linear-gradient(135deg, #f0f8ff, #e0f7fa); /* Gradient background */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Adding icon placeholder */
+input[type="text"]::placeholder {
+    color: #a0a0a0; /* Light gray for placeholder text */
+    opacity: 1; /* Ensure opacity is full */
+}
+
+/* Focus effect */
+input[type="text"]:focus {
+    border: 2px solid #b6cc84; /* Border color when focused */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 8px rgba(182, 204, 132, 0.5); /* Shadow effect */
+}
+
+/* Hover effect */
+input[type="text"]:hover {
+    background: linear-gradient(135deg, #e0f7fa, #f0f8ff); /* Slightly change gradient on hover */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Increase shadow on hover */
+}
+
+header .logout-btn {
+    background-color: #ff4d4d; /* Red background to signify logging out */
+    color: white; /* White text for contrast */
+    padding: 10px 20px; /* Padding for a larger clickable area */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Make the text slightly larger */
+    cursor: pointer; /* Show pointer on hover */
+    text-decoration: none; /* Remove underline from link */
+    display: flex; /* Flexbox to align text and icon */
+    align-items: center; /* Align icon and text vertically */
+    gap: 10px; /* Space between icon and text */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.logout-btn:hover {
+    background-color: #e60000; /* Darker red on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+/* Logout icon styling */
+.logout-btn i {
+    font-size: 1.2em; /* Adjust icon size */
+}
+
+a .logout-btn {
+    background-color: #ff4d4d; /* Red background to signify logging out */
+    color: white; /* White text for contrast */
+    padding: 10px 20px; /* Padding for a larger clickable area */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Make the text slightly larger */
+    cursor: pointer; /* Show pointer on hover */
+    text-decoration: none; /* Remove underline from link */
+    position: absolute; /* Positioning to the top-right corner */
+    top: 20px; /* 20px from the top */
+    right: 20px; /* 20px from the right */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+a .logout-btn:hover {
+    background-color: #e60000; /* Darker red on hover */
+    color: #fff; /* Keep the text white */
+}
+
+/* User Actions (Dashboard & Logout) Styling */
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.user-dashboard-btn {
+    background-color: #008080; /* Teal color to match icons */
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 1.8em;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-dashboard-btn:hover {
+    background-color: #b6cc84; /* Hover color to match the theme */
+    color: #fff;
+}
+
+.logout-btn {
+    color: #b6cc84;
+    font-size: 1.2em;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.logout-btn:hover {
+    color: #fff;
+}
